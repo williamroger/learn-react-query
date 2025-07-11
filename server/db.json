@@ -1,6 +1,7 @@
 {
   "users": [
     { "id": 1, "name": "William Roger", "email": "william@email.com" },
-    { "id": 2, "name": "Ryan Pietro", "email": "ryan@email.com" }
+    { "id": 2, "name": "Ryan Pietro", "email": "ryan@email.com" },
+    { "id": 3, "name": "Jefferson Ricardo", "email": "jefferson@email.com" }
   ]
 }
