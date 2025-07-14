@@ -1,11 +1,15 @@
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import type { IUser } from './types';
 import { sleep } from './sleep';
 
 export function Users() {
+  const [shouldFetch, setShouldFetch] = useState(false);
+
   const { data, isLoading, refetch, isPending, isFetching } = useQuery({
-    enabled: false, // Disable automatic fetching
+    enabled: shouldFetch, // Disable automatic fetching
     queryKey: ['users'],
+    staleTime: 5000,
     queryFn: async (): Promise<IUser[]> => {
       await sleep();
       const response = await fetch('http://localhost:3000/users');
@@ -13,9 +17,14 @@ export function Users() {
     }
   });
  
+  function handleClick() {
+    setShouldFetch(true);
+    refetch();
+  }
+
   return (
     <div className='p-4'>
-      <button className='bg-blue-500 text-white p-2 rounded' onClick={() => refetch()}>
+      <button className='bg-blue-500 text-white p-2 rounded' onClick={handleClick}>
         Logar
       </button>
       {isLoading && <h3>Carregando...</h3>}
