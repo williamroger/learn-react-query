@@ -4,21 +4,24 @@ import type { IUser } from './types';
 import { sleep } from './sleep';
 
 export function Users() {
-  const [shouldFetch, setShouldFetch] = useState(false);
+  // const [shouldFetch, setShouldFetch] = useState(false);
 
-  const { data, isLoading, refetch, isPending, isFetching } = useQuery({
-    enabled: shouldFetch, // Disable automatic fetching
+  const { data, isLoading, refetch, isPending, isFetching, error } = useQuery({
+    enabled: true, 
     queryKey: ['users'],
     staleTime: 5000,
+    retry: 1,
+    retryDelay: 1000,
     queryFn: async (): Promise<IUser[]> => {
       await sleep();
       const response = await fetch('http://localhost:3000/users');
+      // throw new Error('Erro ao buscar usuários');
       return response.json();
     }
   });
  
   function handleClick() {
-    setShouldFetch(true);
+    // setShouldFetch(true);
     refetch();
   }
 
@@ -29,6 +32,8 @@ export function Users() {
       </button>
       {isLoading && <h3>Carregando...</h3>}
       {!isLoading && isFetching && <small>Atualizando...</small>}
+      {error && <h3 className='text-red-500'>{error.toString()}</h3>}
+
       {data?.map((user) => (
       <div key={user.id}>
         <h2>{user.name}</h2>

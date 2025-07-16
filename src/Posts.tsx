@@ -8,6 +8,7 @@ export function Posts() {
     enabled: true, // Disable automatic fetching
     queryKey: ['users'],
     staleTime: 5000,
+    gcTime: 60000,
     queryFn: async (): Promise<IUser[]> => {
       await sleep();
       const response = await fetch('http://localhost:3000/users');
