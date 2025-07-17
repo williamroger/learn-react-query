@@ -4,7 +4,16 @@ import { Users } from './Users';
 import { Posts } from './Posts';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5000, // 5 segundos
+      refetchOnWindowFocus: false,
+      retry: false, // Disable automatic retries
+      gcTime: 10 * 60 * 1000, // 10 minutes
+    }
+  }
+});
 
 export function App() {
   return (

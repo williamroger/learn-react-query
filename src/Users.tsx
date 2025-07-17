@@ -1,24 +1,10 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import type { IUser } from './types';
-import { sleep } from './sleep';
+import { useUsers } from './hooks/useUsers';
 
 export function Users() {
   // const [shouldFetch, setShouldFetch] = useState(false);
 
-  const { data, isLoading, refetch, isPending, isFetching, error } = useQuery({
-    enabled: true, 
-    queryKey: ['users'],
-    staleTime: 5000,
-    retry: 1,
-    retryDelay: 1000,
-    queryFn: async (): Promise<IUser[]> => {
-      await sleep();
-      const response = await fetch('http://localhost:3000/users');
-      // throw new Error('Erro ao buscar usuários');
-      return response.json();
-    }
-  });
+  const { users, isLoading, refetch, isPending, isFetching, error } = useUsers();
  
   function handleClick() {
     // setShouldFetch(true);
@@ -34,7 +20,7 @@ export function Users() {
       {!isLoading && isFetching && <small>Atualizando...</small>}
       {error && <h3 className='text-red-500'>{error.toString()}</h3>}
 
-      {data?.map((user) => (
+      {users.map((user) => (
       <div key={user.id}>
         <h2>{user.name}</h2>
         <p>{user.email}</p>

@@ -1,27 +1,27 @@
-import { useQuery } from '@tanstack/react-query';
-
-import type { IUser } from './types';
+import { useQueryClient } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 import { sleep } from './sleep';
+import type { IUser } from './types';
 
 export function Posts() {
-  const { data } = useQuery({
-    enabled: true, // Disable automatic fetching
-    queryKey: ['users'],
-    staleTime: 5000,
-    gcTime: 60000,
-    queryFn: async (): Promise<IUser[]> => {
-      await sleep();
-      const response = await fetch('http://localhost:3000/users');
-      return response.json();
-    }
-  });
+  const queryClient = useQueryClient();
   
+  function handleMouseOver() {
+    queryClient.prefetchQuery({
+      queryKey: ['users'],
+      queryFn: async (): Promise<IUser[]> => {
+        await sleep();
+        const response = await fetch('http://localhost:3000/users');
+        // throw new Error('Erro ao buscar usuários');
+        return response.json();
+      }
+    })
+  }
+
   return (
     <div>
       <h1>Posts</h1>
-      <pre>
-        {JSON.stringify(data, null, 2)}
-      </pre>
+      <Link to="/" onMouseOver={handleMouseOver}>Ir para os usuários</Link>
     </div>
   )
 }
