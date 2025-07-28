@@ -1,7 +1,49 @@
 {
   "users": [
-    { "id": 1, "name": "William Roger", "email": "william@email.com" },
-    { "id": 2, "name": "Ryan Pietro", "email": "ryan@email.com" },
-    { "id": 3, "name": "Jefferson Ricardo", "email": "jefferson@email.com" }
+    {
+      "id": "1",
+      "name": "William Roger",
+      "email": "william@email.com"
+    },
+    {
+      "id": "2",
+      "name": "Ryan Pietro",
+      "email": "ryan@email.com"
+    },
+    {
+      "id": "3",
+      "name": "Jefferson Ricardo",
+      "email": "jefferson@email.com"
+    },
+    {
+      "id": "2bd3",
+      "name": "Crislan",
+      "email": "cris@email.com"
+    },
+    {
+      "id": "c235",
+      "name": "Bate",
+      "email": "bate@email.com"
+    },
+    {
+      "id": "b653",
+      "name": "novo",
+      "email": "novo@email.com"
+    },
+    {
+      "id": "9296",
+      "name": "teste",
+      "email": "teste@email.com"
+    },
+    {
+      "id": "8acd",
+      "name": "novo usuario",
+      "email": "novousuario@email.com"
+    },
+    {
+      "id": "5b22",
+      "name": "cadastrando",
+      "email": "cadastrando@email.com"
+    }
   ]
 }
